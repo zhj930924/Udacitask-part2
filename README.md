@@ -24,9 +24,9 @@ You should have completed all the necessary steps for finishing this project in 
     * **Colorize**: Use the Colorize gem to colorize the priority to-do symbols ⇩⇨⇧
     * ***Gem of your choice***: [Find a gem of your choice](https://rubygems.org/) and incorporate it into Udacitask 2.0. You can check out [this site](http://www.awesomecommandlineapps.com/gems.html) for suggestions on gems for command-line apps.
 * **Additional features**:
-    * **Required**: Each item should display its item type along with the item description.
-    * **Required**: Write a method `list.filter(item_type)` that takes an `item_type` as input and returns only list items of that type if they exist, or alerts the user if there aren't any items of that type.
-    * ***Add 2 more features of your choice***: If you get stuck deciding on a new feature, here are some suggestions:
+    * Each item should display its item type along with the item description.
+    * Write a method `list.filter(item_type)` that takes an `item_type` as input and returns only list items of that type if they exist, or alerts the user if there aren't any items of that type.
+    * ***In addition to the two features listed above, add 2 more features of your choice***: If you get stuck deciding on a new feature, here are some suggestions:
         * Creating a new item type
         * Using your third gem in an interesting way
         * Allow deletion of multiple items
