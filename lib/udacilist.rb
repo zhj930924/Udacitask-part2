@@ -29,11 +29,20 @@ class UdaciList
   end
 
   def all
-    puts "-" * @title.length
-    puts @title
-    puts "-" * @title.length
+    make_bar(shape: "-", color: :green, length: @title.length)
+    puts @title.colorize(:blue)
+    make_bar(shape: "-", color: :green, length: @title.length)
     @items.each_with_index do |item, position|
       puts "#{position + 1}) #{item.details}"
     end
+  end
+
+  private
+
+  def make_bar(options={})
+    shape = options[:shape]
+    color = options[:color]
+    length = options[:length]
+    puts "#{shape}".colorize(color) * length
   end
 end
