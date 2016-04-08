@@ -29,11 +29,16 @@ class UdaciList
   end
 
   def all
-    make_bar(shape: "-", color: :green, length: @title.length)
-    puts @title.colorize(:blue)
-    make_bar(shape: "-", color: :green, length: @title.length)
+    show_title
     @items.each_with_index do |item, position|
       puts "#{position + 1}) #{item.details}"
+    end
+  end
+
+  def filter(item_type)
+    show_title
+    @items.each_with_index do |item, position|
+      puts "#{position + 1}) #{item.details}" if item.type == item_type
     end
   end
 
@@ -44,5 +49,11 @@ class UdaciList
     color = options[:color]
     length = options[:length]
     puts "#{shape}".colorize(color) * length
+  end
+
+  def show_title
+    make_bar(shape: "-", color: :green, length: @title.length)
+    puts @title.colorize(:blue)
+    make_bar(shape: "-", color: :green, length: @title.length)
   end
 end
