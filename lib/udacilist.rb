@@ -5,15 +5,29 @@ class UdaciList
     @title = options[:title]
     @items = []
   end
+
   def add(type, description, options={})
     type = type.downcase
-    @items.push TodoItem.new(description, options) if type == "todo"
-    @items.push EventItem.new(description, options) if type == "event"
-    @items.push LinkItem.new(description, options) if type == "link"
+    case type
+    when "todo"
+      @items.push TodoItem.new(description, options)
+    when "event"
+      @items.push EventItem.new(description, options)
+    when "link"
+      @items.push LinkItem.new(description, options)
+    else
+      raise UdaciListErrors::InvalidItemType, "Invalid Item Type"
+    end
   end
+
   def delete(index)
-    @items.delete_at(index - 1)
+    if index > @items.size
+      raise UdaciListErrors::IndexExceedsListSize, "Index Exceeds List Size "
+    else
+      @items.delete_at(index - 1)
+    end
   end
+
   def all
     puts "-" * @title.length
     puts @title

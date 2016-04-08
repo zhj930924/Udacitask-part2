@@ -8,6 +8,10 @@
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+
 2. What was the most rewarding challenge you conquered?
+How to call method on optional hash
+
 3. What two additional features did you build? Why?
+
 4. Where do you still have room to grow?
