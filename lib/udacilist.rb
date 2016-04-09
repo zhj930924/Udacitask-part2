@@ -1,4 +1,5 @@
 require 'terminal-table'
+require 'adjective_animal'
 class UdaciList
   attr_reader :title, :items
 
@@ -47,7 +48,52 @@ class UdaciList
     create_table(rows, filtered_items)
   end
 
+  ##########################################################################
+  ########################### Animal feature ###############################
+
+  def summon_animals(animals)
+    create_animals(animals)
+    @animals.each do |animal|
+      self.add("todo", animal.to_s)
+    end
+  end
+
+  def feed_animals
+    @animals.each do |animal|
+      dothingsfor_animal("Buy food for", animal)
+      self.add("todo", "Feed #{animal}", due: "today", priority: "high")
+    end
+  end
+
+  def dothingsfor_animals(action)
+    @animals.each do |animal|
+      dothingsfor_animal(action, animal)
+    end
+  end
+
+  def animal_kingdom
+    self.add("todo", "Meet party animals", due: "tomorrow", priority: "high")
+    self.add("event", "Animal kingdom party", start_date: "today", end_date: "tomorrow")
+  end
+
+  ########################### Animal feature ###############################
+  ##########################################################################
+
   private
+
+  def dothingsfor_animal(action, animal)
+    self.add("todo", "#{action} #{animal.to_s.split[1]}", due: "today", priority: "high")
+  end
+
+  def create_animals(animals)
+    @@animals = []
+    @animals = []
+    animals.times do |animal|
+      @animals << AdjectiveAnimal.new
+    end
+    @@animals << @animals
+    @animals
+  end
 
   def create_table(rows, item_list)
     table = Terminal::Table.new :title => @title.colorize(:blue), :headings => ['Item'.colorize(:red), 'Description'.colorize(:red), 'Details'.colorize(:red)], :rows => rows, :style => {:width => max_length(item_list) * 1.1, :alignment => :left, :padding_left => 3, :border_x => "=", :border_i => "x"}

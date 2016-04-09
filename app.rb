@@ -45,3 +45,15 @@ new_list.add("link", "http://ruby-doc.org")
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
 new_list.filter("event")
+
+# DEMO ANIMAL FEATURE
+# -------------------
+new_list.all
+new_list.summon_animals(3)
+new_list.all
+new_list.feed_animals
+new_list.all
+new_list.dothingsfor_animals("Fight for")
+new_list.all
+new_list.animal_kingdom
+new_list.all

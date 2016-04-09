@@ -11,6 +11,11 @@
 
 2. What was the most rewarding challenge you conquered?
 How to call method on optional hash
+figured out
+I used options{} to select instead of options[]
+
+Try to install asciiart on windows but can't.
+Can't find any pet related gems.
 
 3. What two additional features did you build? Why?
 

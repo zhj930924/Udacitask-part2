@@ -1,15 +1,19 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    adjective_animal (0.0.2)
     chronic (0.10.2)
     colorize (0.7.7)
+    terminal-table (1.5.2)
 
 PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  adjective_animal
   chronic
   colorize
+  terminal-table (~> 1.5, >= 1.5.2)
 
 BUNDLED WITH
    1.11.2
