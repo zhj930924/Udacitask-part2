@@ -12,7 +12,11 @@ class LinkItem
     @site_name ? @site_name : ""
   end
 
+  def descriptions
+    format_description(@description)
+  end
+
   def details
-    format_description(@description) + "site name: " + format_name
+    "site name: ".colorize(:green) + format_name
   end
 end

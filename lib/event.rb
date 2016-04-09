@@ -9,8 +9,12 @@ class EventItem
     @type = 'event'
   end
 
+  def descriptions
+    format_description(@description)
+  end
+
   def details
-    format_description(@description) + "event dates: " +
-    format_date(start_date: @start_date, end_date: @end_date)
+    "event dates: ".colorize(:green) +
+   format_date(start_date: @start_date, end_date: @end_date)
   end
 end

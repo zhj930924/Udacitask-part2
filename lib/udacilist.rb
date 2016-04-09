@@ -1,3 +1,4 @@
+require 'terminal-table'
 class UdaciList
   attr_reader :title, :items
 
@@ -29,20 +30,53 @@ class UdaciList
   end
 
   def all
-    show_title
+    rows = []
     @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
+      rows << ["#{position + 1})", "#{item.descriptions}", "#{item.details}"]
     end
+    create_table(rows, @items)
   end
 
   def filter(item_type)
-    show_title
+    rows = []
+    filtered_items = []
     @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}" if item.type == item_type
+      rows << ["#{position + 1})".colorize(:green), "#{item.descriptions}", "#{item.details}"] if item.type == item_type
+      filtered_items << item if item.type == item_type
     end
+    create_table(rows, filtered_items)
   end
 
   private
+
+  def create_table(rows, item_list)
+    table = Terminal::Table.new :title => @title.colorize(:blue), :headings => ['Item'.colorize(:red), 'Description'.colorize(:red), 'Details'.colorize(:red)], :rows => rows, :style => {:width => max_length(item_list) * 1.1, :alignment => :left, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    puts table
+  end
+
+  def calc_total_sales(toy)
+    toy['purchases'].inject(0) { |sum, purchase| sum + purchase['price'].to_f }
+  end
+
+  def max_length(item_list)
+    max_description_length(item_list) + max_details_length(item_list) + 5
+  end
+
+  def max_description_length(item_list)
+    max = 0
+    item_list.each do |item|
+      max = item.descriptions.length if item.descriptions.length > max
+    end
+    max
+  end
+
+  def max_details_length(item_list)
+    max = 0
+    item_list.each do |item|
+      max = item.details.length if item.details.length > max
+    end
+    max
+  end
 
   def make_bar(options={})
     shape = options[:shape]

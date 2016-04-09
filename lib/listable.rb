@@ -11,20 +11,6 @@ module Listable
     end
   end
 
-  # def format_date(date)
-  #   case date
-  #   when date.size == 1
-  #     date[0] ? date[0].strftime("%D") : "No due date"
-  #   when date.size == 2
-  #     dates = date[0].strftime("%D") if date[0]
-  #     dates << " -- " + date[1].strftime("%D") if date[1]
-  #     dates = "N/A" if !dates
-  #     return dates
-  #   else
-  #     puts 'Invalid dates'
-  #   end
-  # end
-
   def format_date(options = {})
     if options[:start_date] && options[:end_date]
       dates = options[:start_date].strftime("%D") if options[:start_date]

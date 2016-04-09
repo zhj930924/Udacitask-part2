@@ -9,9 +9,11 @@ class TodoItem
     @type = 'todo'
   end
 
+  def descriptions
+    format_description(@description)
+  end
+
   def details
-    format_description(@description) + "due: " +
-    format_date(due: @due) +
-    format_priority(@priority)
+    "due: ".colorize(:green) + format_date(due: @due) + format_priority(@priority)
   end
 end
