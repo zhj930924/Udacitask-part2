@@ -51,7 +51,7 @@ class UdaciList
     end
   end
 
-  def animals
+  def show_animals
     @animals.each do |animal|
       puts animal
     end
@@ -144,10 +144,6 @@ class UdaciList
     puts table
   end
 
-  def calc_total_sales(toy)
-    toy['purchases'].inject(0) { |sum, purchase| sum + purchase['price'].to_f }
-  end
-
   def max_length(item_list)
     max_description_length(item_list) + max_details_length(item_list) + 5
   end
@@ -183,9 +179,10 @@ class UdaciList
     puts "#{shape}".colorize(color) * length
   end
 
-  def show_title
-    make_bar(shape: "-", color: :green, length: @title.length)
-    puts @title.colorize(:blue)
-    make_bar(shape: "-", color: :green, length: @title.length)
-  end
+  # For the original all method
+  # def show_title
+  #   make_bar(shape: "-", color: :green, length: @title.length)
+  #   puts @title.colorize(:blue)
+  #   make_bar(shape: "-", color: :green, length: @title.length)
+  # end
 end
