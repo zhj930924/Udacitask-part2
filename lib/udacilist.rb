@@ -1,5 +1,6 @@
 require 'terminal-table'
 require 'adjective_animal'
+
 class UdaciList
   attr_reader :title, :items
 
@@ -19,14 +20,6 @@ class UdaciList
       @items.push LinkItem.new(description, options)
     else
       raise UdaciListErrors::InvalidItemType, "Invalid Item Type"
-    end
-  end
-
-  def delete(index)
-    if index > @items.size
-      raise UdaciListErrors::IndexExceedsListSize, "Index Exceeds List Size "
-    else
-      @items.delete_at(index - 1)
     end
   end
 
@@ -58,6 +51,12 @@ class UdaciList
     end
   end
 
+  def animals
+    @animals.each do |animal|
+      puts animal
+    end
+  end
+
   def feed_animals
     @animals.each do |animal|
       dothingsfor_animal("Buy food for", animal)
@@ -79,7 +78,52 @@ class UdaciList
   ########################### Animal feature ###############################
   ##########################################################################
 
+  ##########################################################################
+  ########################## Advanced Deletion #############################
+
+  def delete(*args)
+    if args.length == 1
+      index = *args
+      delete_index(index)
+    elsif args.length == 2
+      start_index, end_index = *args
+      delete_range(start_index, end_index)
+    elsif args.length > 2 && args.length < @items.length
+      indices = *args.each { |arg| arg }
+      delete_indices(indices)
+    else
+      raise UdaciListErrors::ArgumentError, "Too many arguments" if args.length
+    end
+  end
+
+  def delete_all
+    @items.clear
+  end
+
+  ########################## Advanced Deletion #############################
+  ##########################################################################
+
   private
+
+  def delete_index(index)
+    if index[0] > @items.size
+      raise UdaciListErrors::IndexExceedsListSize, "Index Exceeds List Size "
+    else
+      @items.delete_at(index[0] - 1)
+    end
+  end
+
+  def delete_range(start_index, end_index)
+    start_index = start_index - 1
+    end_index = end_index - 1
+    @items.slice!(start_index..end_index)
+  end
+
+  def delete_indices(indices)
+    new_array = []
+    indices.each { |index| new_array.push @items.at(index - 1) }
+    @items -= new_array
+  end
 
   def dothingsfor_animal(action, animal)
     self.add("todo", "#{action} #{animal.to_s.split[1]}", due: "today", priority: "high")
@@ -110,16 +154,24 @@ class UdaciList
 
   def max_description_length(item_list)
     max = 0
-    item_list.each do |item|
-      max = item.descriptions.length if item.descriptions.length > max
+    if !item_list.empty?
+      item_list.each do |item|
+        max = item.descriptions.length if item.descriptions.length > max
+      end
+    else
+      max = 20
     end
     max
   end
 
   def max_details_length(item_list)
     max = 0
-    item_list.each do |item|
-      max = item.details.length if item.details.length > max
+    if !item_list.empty?
+      item_list.each do |item|
+        max = item.details.length if item.details.length > max
+      end
+    else
+      max = 20
     end
     max
   end
