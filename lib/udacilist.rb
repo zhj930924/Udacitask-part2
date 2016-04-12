@@ -26,13 +26,13 @@ class UdaciList
       unless ["high", "medium", "low"].include? priority
         raise UdaciListErrors::InvalidPriorityValue
       end
-    end    
+    end
   end
 
   def all
     rows = []
     @items.each_with_index do |item, position|
-      rows << ["#{position + 1})", "#{item.descriptions}", "#{item.details}"]
+      rows << ["#{position + 1})", "#{item.descriptions}", "#{item.type.capitalize}", "#{item.details}"]
     end
     create_table(rows, @items)
   end
@@ -41,7 +41,7 @@ class UdaciList
     rows = []
     filtered_items = []
     @items.each_with_index do |item, position|
-      rows << ["#{position + 1})".colorize(:green), "#{item.descriptions}", "#{item.details}"] if item.type == item_type
+      rows << ["#{position + 1})".colorize(:green), "#{item.descriptions}", "#{item.type.capitalize}", "#{item.details}"] if item.type == item_type
       filtered_items << item if item.type == item_type
     end
     create_table(rows, filtered_items)
@@ -152,7 +152,7 @@ class UdaciList
   end
 
   def create_table(rows, item_list)
-    table = Terminal::Table.new :title => @title.colorize(:blue), :headings => ['Item'.colorize(:red), 'Description'.colorize(:red), 'Details'.colorize(:red)], :rows => rows, :style => {:width => max_length(item_list) * 1.1, :alignment => :left, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    table = Terminal::Table.new :title => @title.colorize(:blue), :headings => ['Item'.colorize(:red), 'Description'.colorize(:red), 'Type'.colorize(:red), 'Details'.colorize(:red)], :rows => rows, :style => {:width => max_length(item_list) * 1.1, :alignment => :left, :padding_left => 3, :border_x => "=", :border_i => "x"}
     puts table
   end
 
