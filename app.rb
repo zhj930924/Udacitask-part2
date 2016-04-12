@@ -61,7 +61,6 @@ require_relative "lib/link"
 # new_list.animal_kingdom
 # new_list.all
 
-
 # DEMO ADVANCED DELETE
 # --------------------
 # new_list.all

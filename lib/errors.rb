@@ -10,4 +10,7 @@ module UdaciListErrors
 
   class ArgumentError < StandardError
   end
+
+  class InvalidIndices < StandardError
+  end
 end

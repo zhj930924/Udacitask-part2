@@ -11,6 +11,7 @@ class UdaciList
 
   def add(type, description, options={})
     type = type.downcase
+    priority = options[:priority]
     case type
     when "todo"
       @items.push TodoItem.new(description, options)
@@ -21,6 +22,11 @@ class UdaciList
     else
       raise UdaciListErrors::InvalidItemType, "Invalid Item Type"
     end
+    if priority
+      unless ["high", "medium", "low"].include? priority
+        raise UdaciListErrors::InvalidPriorityValue
+      end
+    end    
   end
 
   def all
@@ -107,16 +113,22 @@ class UdaciList
 
   def delete_index(index)
     if index[0] > @items.size
-      raise UdaciListErrors::IndexExceedsListSize, "Index Exceeds List Size "
+      raise UdaciListErrors::IndexExceedsListSize, "Index Exceeds List Size"
     else
       @items.delete_at(index[0] - 1)
     end
   end
 
   def delete_range(start_index, end_index)
-    start_index = start_index - 1
-    end_index = end_index - 1
-    @items.slice!(start_index..end_index)
+    if start_index < end_index
+      if end_index <= @items.size
+        start_index = start_index - 1
+        end_index = end_index - 1
+        @items.slice!(start_index..end_index)
+      else
+        raise UdaciListErrors::InvalidIndices, "Invilid Indices"
+      end
+    end
   end
 
   def delete_indices(indices)
@@ -150,7 +162,7 @@ class UdaciList
 
   def max_description_length(item_list)
     max = 0
-    if !item_list.empty?
+    unless item_list.empty?
       item_list.each do |item|
         max = item.descriptions.length if item.descriptions.length > max
       end
@@ -162,7 +174,7 @@ class UdaciList
 
   def max_details_length(item_list)
     max = 0
-    if !item_list.empty?
+    unless item_list.empty?
       item_list.each do |item|
         max = item.details.length if item.details.length > max
       end
