@@ -69,16 +69,16 @@ new_list.all
 
 # DEMO ADVANCED DELETE
 # --------------------
-# new_list.all
-# new_list.delete(3)
-# puts 'delete index 3'
-# new_list.all
-# new_list.delete(4, 8)
-# puts 'delete index 4 to 8'
-# new_list.all
-# new_list.delete(2, 3, 5)
-# puts 'delete index 2, 3, 5'
-# new_list.all
-# new_list.delete_all
-# puts 'delete all'
-# new_list.all
+new_list.all
+new_list.delete(3)
+puts 'delete index 3'
+new_list.all
+new_list.delete(4, 8)
+puts 'delete index 4 to 8'
+new_list.all
+new_list.delete(2, 3, 5)
+puts 'delete index 2, 3, 5'
+new_list.all
+new_list.delete_all
+puts 'delete all'
+new_list.all
