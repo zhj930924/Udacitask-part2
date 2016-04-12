@@ -58,9 +58,11 @@ class UdaciList
   end
 
   def show_animals
+    rows = []
     @animals.each do |animal|
-      puts animal
+      rows << [animal.to_s]
     end
+    create_animals_table(rows)
   end
 
   def feed_animals
@@ -156,6 +158,11 @@ class UdaciList
     puts table
   end
 
+  def create_animals_table(rows)
+    table = Terminal::Table.new :title => 'Summoned Animals'.colorize(:blue), :rows => rows, :style => {:width => max_animals_length(rows) * 1.6, :alignment => :left, :border_x => "=", :border_i => "x"}
+    puts table
+  end
+
   def max_length(item_list)
     max_description_length(item_list) + max_details_length(item_list) + 5
   end
@@ -180,6 +187,18 @@ class UdaciList
       end
     else
       max = 20
+    end
+    max
+  end
+
+  def max_animals_length(animals_list)
+    max = 0
+    unless animals_list.empty?
+      animals_list.each do |animal|
+        max = animal[0].length if animal[0].length > max
+      end
+    else
+      max = 30
     end
     max
   end

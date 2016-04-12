@@ -50,15 +50,21 @@ new_list.add("link", "http://ruby-doc.org")
 
 # DEMO ANIMAL FEATURE
 # -------------------
+puts 'Original table'
 new_list.all
 new_list.summon_animals(3)
-new_list.animals
+puts 'Show animals summoned'
+new_list.show_animals
+puts 'Show summoned animals in the table'
 new_list.all
 new_list.feed_animals
+puts 'Feed animals'
 new_list.all
 new_list.dothingsfor_animals("Fight for")
+puts 'Do things for anmials'
 new_list.all
 new_list.animal_kingdom
+puts 'The effect of animal kingdom'
 new_list.all
 
 # DEMO ADVANCED DELETE
